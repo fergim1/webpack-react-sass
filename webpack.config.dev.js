@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -33,32 +34,34 @@ module.exports = {
       },
       {
         test: /\.(css|scss|sass)$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/images/[name].[hash].[ext]",
+          filename: "assets/images/[name][ext]",
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/fonts/[name].[hash].[ext]",
+          filename: "assets/fonts/[name][ext]",
         },
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
+      inject: true,
       template: "./public/index.html",
       filename: "index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "assets/[name].css",
     }),
+    new Dotenv(),
   ],
   devServer: {
     static: {
