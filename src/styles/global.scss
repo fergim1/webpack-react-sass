@@ -1,5 +1,21 @@
-$base-color: green;
+@import "vars";
 
-body {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/ubuntu-regular.woff2") format("woff2"),
+    url("../assets/fonts/ubuntu-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  font-size: 62, 5%;
   background-color: $base-color;
+  font-family: "Ubuntu";
 }
